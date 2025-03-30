@@ -47,7 +47,13 @@ public class PlayerTest : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        
+        if (playNum == 1) {
         move = Input.GetAxis("Horizontal");
+        } else {
+        move = Input.GetAxis("Horizontal2");
+        }
+
         //Is the player standing on something?
         grounded = Physics2D.OverlapBox(feet.position, feetBox, 0, groundMask);
         
@@ -63,11 +69,15 @@ public class PlayerTest : MonoBehaviour
         } else if (cTime > 0) {cTime -= Time.deltaTime;}
 
         //Jump
-        if (Input.GetButtonDown("Jump")  && dashCD < 0.5f)
+        if (playNum == 1 && Input.GetButtonDown("Jump")) {
+            if (grounded) {jump = true;}
+            else if (cTime > 0 && rb.linearVelocityY < 0) {jump = true;}
+            else if (doubleJump == 1) {jump = true; doubleJump = 0;}
+        } else if (playNum == 2 && Input.GetButtonDown("Jump2")) {
             if (grounded) {jump = true;}
             else if (cTime > 0 && rb.linearVelocityY < 0) {jump = true;}
             else if (doubleJump == 1) {jump = true; doubleJump = 0;} 
-
+            }
         /*if (Input.GetKeyDown(KeyCode.Space) && dash >= 1 && dashCD <= 0){
             dashInp = true;
         }*/
