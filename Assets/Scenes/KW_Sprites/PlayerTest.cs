@@ -8,7 +8,6 @@ public class PlayerTest : MonoBehaviour
     SpriteRenderer sr;
     public GameObject blackHole;
     float move;
-    float jumpForce = 8;
     float dashForce = 15;
     bool jump;
     bool grounded;
@@ -21,6 +20,7 @@ public class PlayerTest : MonoBehaviour
     int cpNum = 0;
 
     public float spdMLT;
+    public float jumpForce = 6;
 
     float cTime = 0; //Coyote time
     int doubleJump = 1;
