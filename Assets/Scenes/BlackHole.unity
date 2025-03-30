@@ -847,8 +847,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blackHole: {fileID: 851530107}
-  spdMLT: 8
-  jumpForce: 7
+  spdMLT: 19.25
+  jumpForce: 12.5
 --- !u!212 &759497776
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1311,9 +1311,9 @@ PointEffector2D:
   m_ColliderMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_ForceMagnitude: -250
+  m_ForceMagnitude: -80000
   m_ForceVariation: 0
-  m_DistanceScale: 0.95
+  m_DistanceScale: 2
   m_ForceSource: 0
   m_ForceTarget: 0
   m_ForceMode: 2
@@ -1354,7 +1354,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 30
+  m_Radius: 75
 --- !u!212 &851530110
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3186,7 +3186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1812124606
 AudioListener:
   m_ObjectHideFlags: 0
