@@ -27,11 +27,8 @@ public class GameManager : MonoBehaviour
         var all = 0;
         for (int i = 1; i < Stars.Count; ++i) {
             var egg = Random.Range(0, 1);
-            if (Random.Range(0, 2) == 1) {Stars[i].SetActive(true);}
+            if (Random.Range(0, 2) == 1 || all >= 4) {Stars[i].SetActive(true);}
             else {Stars[i].SetActive(false); all += 1;}
-            if (all == 4) {
-                break;
-            }
         } 
     }
 }
