@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cd9e5beb3877246c4840ee9e43815b3f
+guid: 232c00ef55eb99d43a6164492385079d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5053686930570015653
-    second: BlackHoleStar_0
+      213: 8645772218742607857
+    second: BlackHoleGameOver_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BlackHoleStar_0
+      name: BlackHoleGameOver_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 80
-        height: 80
+        width: 1600
+        height: 1200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5a3f8aedc7d422640800000000000000
-      internalID: 5053686930570015653
+      spriteID: 1ff08139604fbf770800000000000000
+      internalID: 8645772218742607857
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      BlackHoleStar_0: 5053686930570015653
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
