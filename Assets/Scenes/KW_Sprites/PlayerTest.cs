@@ -9,6 +9,7 @@ public class PlayerTest : MonoBehaviour
     AudioSource audSrc;
     public AudioClip pain;
     public AudioClip token;
+    GameObject MANAGER;
     public List<GameObject> hearts;
     Rigidbody2D rb;
     SpriteRenderer sr;
@@ -20,6 +21,7 @@ public class PlayerTest : MonoBehaviour
     bool grounded;
     bool dashInp;
     bool dashOrb = false;
+    bool reset = false;
     int dash = 1;
     float dashCD = 0;
     String direct = "Right";
@@ -47,6 +49,7 @@ public class PlayerTest : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         feet = transform.Find("Feet");
         groundMask = LayerMask.GetMask("GROUND");
+        MANAGER = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
@@ -133,7 +136,13 @@ public class PlayerTest : MonoBehaviour
         /*if (collision.gameObject.CompareTag("Hurt")){Died();}*/
         if (collision.gameObject.CompareTag("Token")) {
             score += 1; scoreUp(); audSrc.PlayOneShot(token);
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
+        }
+        if (collision.gameObject.name == "Check2") {
+            reset = true;
+        }
+        if (collision.gameObject.name == "Check1" && reset) {
+            MANAGER.GetComponent<GameManager>().setTokens();
         }
     }
 
