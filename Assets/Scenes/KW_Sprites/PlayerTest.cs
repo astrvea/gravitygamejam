@@ -1,12 +1,18 @@
+using TMPro;
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerTest : MonoBehaviour
 {
+    public List<GameObject> hearts;
+    public Sprite oneHealth;
+    public Sprite zeroHealth;
     Rigidbody2D rb;
     SpriteRenderer sr;
     public GameObject blackHole;
+    public TMP_Text scoreTxt;
     float move;
     float dashForce = 15;
     bool jump;
@@ -24,6 +30,7 @@ public class PlayerTest : MonoBehaviour
     public int playNum;
     public int score = 0;
     public int health = 5;
+    float iFrames = 0;
 
     float cTime = 0; //Coyote time
     int doubleJump = 1;
@@ -104,20 +111,44 @@ public class PlayerTest : MonoBehaviour
             if (direct == "Right") {rb.AddForce(transform.right * dashForce, ForceMode2D.Impulse);}
             else {rb.AddForce(transform.right * dashForce * -1, ForceMode2D.Impulse);}
         }
+        if (iFrames > 0) {
+            iFrames -= Time.fixedDeltaTime;
+            Debug.Log(iFrames);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
-        /*if (collision.gameObject.CompareTag("Checkpoint")){
-            if (collision.GetComponent<Checkpoint>().checkNum > cpNum) {
-                cpNum = collision.GetComponent<Checkpoint>().checkNum;
-                respawn = new Vector2(collision.GetComponent<Checkpoint>().respawnX, collision.GetComponent<Checkpoint>().respawnY);
-            }
-        }
-        if (collision.gameObject.CompareTag("Hurt")){Died();}*/
+        /*if (collision.gameObject.CompareTag("Hurt")){Died();}*/
         if (collision.gameObject.CompareTag("Token")) {
             score += 1;
+            scoreUp();
             Destroy(collision.gameObject);
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("PAIN")) {
+            if (iFrames <= 0){
+            iFrames = 1.5f;
+            health -= 1;
+            DrawHearts();
+            }
+        }
+    }
+
+    void DrawHearts() {
+        for (int i = 0; i < hearts.Count; i++) {
+            hearts[i].SetActive(false);
+        }
+
+        for (int i = 0; i < health; i++) {
+            hearts[i].SetActive(true);
+        }
+    }
+
+    void scoreUp(){
+        scoreTxt.text = "P" + playNum.ToString() + " Score: " + score.ToString();
     }
 
     public void pRespawn() {
