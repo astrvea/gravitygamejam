@@ -725,7 +725,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press Jump Button to Return to Main Menu
+  m_text: Player 1 Jump - Return to Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: af19d7dc85c04274296aa9ec82df8e8e, type: 2}
   m_sharedMaterial: {fileID: -3808468870165210759, guid: af19d7dc85c04274296aa9ec82df8e8e, type: 2}
