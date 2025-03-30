@@ -31,7 +31,7 @@ public class PlayerTest : MonoBehaviour
     public float spdMLT;
     public float jumpForce = 6;
     public int playNum;
-    public int score = 0;
+    public static int score = 0;
     public int health = 5;
     float iFrames = 0;
 
@@ -50,6 +50,7 @@ public class PlayerTest : MonoBehaviour
         feet = transform.Find("Feet");
         groundMask = LayerMask.GetMask("GROUND");
         MANAGER = GameObject.Find("GameManager");
+        DrawHearts();
     }
 
     // Update is called once per frame
@@ -153,7 +154,7 @@ public class PlayerTest : MonoBehaviour
             iFrames = 1.5f; health -= 1; audSrc.PlayOneShot(pain);
             DrawHearts();
             if (health <= 0) {
-                GameManager2.instance.EndGame();
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Lose");
             }
             }
         }
@@ -165,6 +166,10 @@ public class PlayerTest : MonoBehaviour
             if (iFrames <= 0){
             iFrames = 1.5f; health -= 1; audSrc.PlayOneShot(pain);
             DrawHearts();
+            if (health <= 0) {
+
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Lose");
+            }
             }
         }
     }

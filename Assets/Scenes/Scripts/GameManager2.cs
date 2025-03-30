@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,7 @@ public class GameManager2 : MonoBehaviour
     public static GameManager2 instance;
     GameObject p1;
     GameObject p2;
+    TMP_Text p1s_Text;
     string currScene;
     int p1_Score;
     //int p2_Score;
@@ -35,33 +37,34 @@ public class GameManager2 : MonoBehaviour
         currScene = SceneManager.GetActiveScene().name;
         if (currScene == "MainMenu") {
             MainUpdate();
-        } else {
-            if (currScene == "BlackHole" && p1 == null) {
+        } else if (currScene == "BlackHole" && p1 == null) {
                 SetUp();
-            }
+        } else if (currScene == "Lose" && p1s_Text == null) {
+            EndGame();
         }
     }
 
     void MainUpdate() {
         if (Input.GetButtonDown("Jump")) {
+            PlayerTest.score = 0;
             SceneManager.LoadScene("BlackHole");
-            
-        } else if (Input.GetButtonDown("Jump2")){
-            //playCount = 2;
-            SceneManager.LoadScene("BlackHole");
-            }
+        } 
     }
 
-    public void EndGame(){
-            SceneManager.LoadScene("BlackHole");
-
+    void EndGame(){
+        p1s_Text = GameObject.Find("Player1_Score").GetComponent<TMP_Text>();
+        p1s_Text.text = "Score: " + PlayerTest.score.ToString();
     }
 
     void SetUp() {
+        if (currScene == "BlackHole") {
         p1 = GameObject.Find("Player1");
         if (p1 == null) {
             return;
-        } /*
+        }} else if (currScene == "Lose") {
+
+        }
+        /*
         p2 = GameObject.Find("Player2");
         if (playCount == 1){
                 var kill = GameObject.Find("P2_UI");
