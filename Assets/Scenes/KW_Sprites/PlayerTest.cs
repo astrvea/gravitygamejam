@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 public class PlayerTest : MonoBehaviour
 {
+    AudioSource audSrc;
+    public AudioClip pain;
+    public AudioClip token;
     public List<GameObject> hearts;
     Rigidbody2D rb;
     SpriteRenderer sr;
@@ -39,6 +42,7 @@ public class PlayerTest : MonoBehaviour
     Vector2 feetBox = new Vector2(0.5f, 0.35f);
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
+        audSrc = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         feet = transform.Find("Feet");
@@ -128,8 +132,7 @@ public class PlayerTest : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision) {
         /*if (collision.gameObject.CompareTag("Hurt")){Died();}*/
         if (collision.gameObject.CompareTag("Token")) {
-            score += 1;
-            scoreUp();
+            score += 1; scoreUp(); audSrc.PlayOneShot(token);
             Destroy(collision.gameObject);
         }
     }
@@ -138,8 +141,7 @@ public class PlayerTest : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PAIN")) {
             if (iFrames <= 0){
-            iFrames = 1.5f;
-            health -= 1;
+            iFrames = 1.5f; health -= 1; audSrc.PlayOneShot(pain);
             DrawHearts();
             }
         }
@@ -149,8 +151,7 @@ public class PlayerTest : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PAIN")) {
             if (iFrames <= 0){
-            iFrames = 1.5f;
-            health -= 1;
+            iFrames = 1.5f; health -= 1; audSrc.PlayOneShot(pain);
             DrawHearts();
             }
         }
