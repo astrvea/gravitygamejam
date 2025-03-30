@@ -49,7 +49,7 @@ public class PlayerTest : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         feet = transform.Find("Feet");
         groundMask = LayerMask.GetMask("GROUND");
-        MANAGER = GameObject.Find("GameManager");
+        MANAGER = GameObject.Find("StarManage");
         DrawHearts();
     }
 
