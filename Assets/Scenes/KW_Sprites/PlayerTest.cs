@@ -7,8 +7,6 @@ using System.Collections.Generic;
 public class PlayerTest : MonoBehaviour
 {
     public List<GameObject> hearts;
-    public Sprite oneHealth;
-    public Sprite zeroHealth;
     Rigidbody2D rb;
     SpriteRenderer sr;
     public GameObject blackHole;
@@ -127,6 +125,17 @@ public class PlayerTest : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("PAIN")) {
+            if (iFrames <= 0){
+            iFrames = 1.5f;
+            health -= 1;
+            DrawHearts();
+            }
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("PAIN")) {
             if (iFrames <= 0){
