@@ -6,9 +6,10 @@ using System.Collections.Generic;
 
 public class PlayerTest : MonoBehaviour
 {
+    AudioSource audSrc;
+    public AudioClip pain;
+    public AudioClip token;
     public List<GameObject> hearts;
-    public Sprite oneHealth;
-    public Sprite zeroHealth;
     Rigidbody2D rb;
     SpriteRenderer sr;
     public GameObject blackHole;
@@ -41,6 +42,7 @@ public class PlayerTest : MonoBehaviour
     Vector2 feetBox = new Vector2(0.5f, 0.35f);
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
+        audSrc = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         feet = transform.Find("Feet");
@@ -49,7 +51,13 @@ public class PlayerTest : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        
+        if (playNum == 1) {
         move = Input.GetAxis("Horizontal");
+        } else {
+        move = Input.GetAxis("Horizontal2");
+        }
+
         //Is the player standing on something?
         grounded = Physics2D.OverlapBox(feet.position, feetBox, 0, groundMask);
         
@@ -65,11 +73,15 @@ public class PlayerTest : MonoBehaviour
         } else if (cTime > 0) {cTime -= Time.deltaTime;}
 
         //Jump
-        if (Input.GetButtonDown("Jump")  && dashCD < 0.5f)
+        if (playNum == 1 && Input.GetButtonDown("Jump")) {
+            if (grounded) {jump = true;}
+            else if (cTime > 0 && rb.linearVelocityY < 0) {jump = true;}
+            else if (doubleJump == 1) {jump = true; doubleJump = 0;}
+        } else if (playNum == 2 && Input.GetButtonDown("Jump2")) {
             if (grounded) {jump = true;}
             else if (cTime > 0 && rb.linearVelocityY < 0) {jump = true;}
             else if (doubleJump == 1) {jump = true; doubleJump = 0;} 
-
+            }
         /*if (Input.GetKeyDown(KeyCode.Space) && dash >= 1 && dashCD <= 0){
             dashInp = true;
         }*/
@@ -120,8 +132,7 @@ public class PlayerTest : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision) {
         /*if (collision.gameObject.CompareTag("Hurt")){Died();}*/
         if (collision.gameObject.CompareTag("Token")) {
-            score += 1;
-            scoreUp();
+            score += 1; scoreUp(); audSrc.PlayOneShot(token);
             Destroy(collision.gameObject);
         }
     }
@@ -130,8 +141,17 @@ public class PlayerTest : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PAIN")) {
             if (iFrames <= 0){
-            iFrames = 1.5f;
-            health -= 1;
+            iFrames = 1.5f; health -= 1; audSrc.PlayOneShot(pain);
+            DrawHearts();
+            }
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("PAIN")) {
+            if (iFrames <= 0){
+            iFrames = 1.5f; health -= 1; audSrc.PlayOneShot(pain);
             DrawHearts();
             }
         }
