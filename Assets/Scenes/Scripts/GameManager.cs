@@ -12,10 +12,6 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void ScoreUp(int playerNum) {
-
-    }
-
     void Start()
     {
         setTokens();

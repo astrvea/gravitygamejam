@@ -152,6 +152,9 @@ public class PlayerTest : MonoBehaviour
             if (iFrames <= 0){
             iFrames = 1.5f; health -= 1; audSrc.PlayOneShot(pain);
             DrawHearts();
+            if (health <= 0) {
+                GameManager2.instance.EndGame();
+            }
             }
         }
     }
