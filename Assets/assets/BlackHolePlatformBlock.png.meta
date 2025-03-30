@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BlackHolePlatformBlock_0: 1906112752688709424
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
