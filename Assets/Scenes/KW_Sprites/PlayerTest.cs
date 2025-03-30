@@ -21,6 +21,9 @@ public class PlayerTest : MonoBehaviour
 
     public float spdMLT;
     public float jumpForce = 6;
+    public int playNum;
+    public int score = 0;
+    public int health = 5;
 
     float cTime = 0; //Coyote time
     int doubleJump = 1;
@@ -111,6 +114,10 @@ public class PlayerTest : MonoBehaviour
             }
         }
         if (collision.gameObject.CompareTag("Hurt")){Died();}*/
+        if (collision.gameObject.CompareTag("Token")) {
+            score += 1;
+            Destroy(collision.gameObject);
+        }
     }
 
     public void pRespawn() {
